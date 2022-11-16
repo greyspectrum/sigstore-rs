@@ -49,6 +49,9 @@ pub enum SigstoreError {
     #[error("failed to construct oauth code pair")]
     CodePairError,
 
+    #[error("failed to convert i32 to string")]
+    Stringi32Error(#[from] std::num::ParseIntError),
+
     #[error("invalid key format: {error}")]
     InvalidKeyFormat { error: String },
 

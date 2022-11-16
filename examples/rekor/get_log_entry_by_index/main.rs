@@ -16,10 +16,11 @@
 use clap::{Arg, Command};
 use sigstore::rekor::apis::{configuration::Configuration, entries_api};
 use sigstore::rekor::models::log_entry::LogEntry;
+use sigstore::errors::SigstoreError;
 use std::str::FromStr;
 
 #[tokio::main]
-async fn main() {
+async fn main() -> Result<(), SigstoreError> {
     /*
 
     Retrieves an entry and inclusion proof from the transparency log (if it exists) by index
@@ -39,12 +40,7 @@ async fn main() {
     const LOG_INDEX: &str = "1";
 
     let flags = matches.get_matches();
-    let index = i32::from_str(
-        flags
-            .get_one::<String>("log_index")
-            .unwrap_or(&LOG_INDEX.to_string()),
-    )
-    .unwrap();
+    let index = i32::from_str(flags.get_one::<String>("log_index").unwrap_or(&LOG_INDEX.to_string()),)?;
 
     let configuration = Configuration::default();
 
@@ -52,4 +48,6 @@ async fn main() {
         .await
         .unwrap();
     println!("{:#?}", message);
+
+    Ok(())
 }
