@@ -174,7 +174,7 @@ async fn run_app(
 
         verification_constraints.push(Box::new(CertSubjectUrlVerifier {
             url: cert_url.to_string(),
-            issuer: issuer.unwrap(),
+            issuer: issuer?,
         }));
     }
     if let Some(path_to_key) = cli.key.as_ref() {
