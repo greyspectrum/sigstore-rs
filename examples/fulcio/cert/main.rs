@@ -1,15 +1,14 @@
 use pkcs8::der::Decode;
 use sigstore::crypto::SigningScheme;
+use sigstore::errors::SigstoreError;
 use sigstore::fulcio::oauth::OauthTokenProvider;
 use sigstore::fulcio::{FulcioClient, TokenProvider, FULCIO_ROOT};
-use sigstore::errors::SigstoreError;
 use url::Url;
 use x509_cert::ext::pkix::SubjectAltName;
 use x509_cert::Certificate;
 
 #[tokio::main]
 async fn main() -> Result<(), SigstoreError> {
-
     let fulcio = FulcioClient::new(
         Url::parse(FULCIO_ROOT)?,
         TokenProvider::Oauth(OauthTokenProvider::default()),
