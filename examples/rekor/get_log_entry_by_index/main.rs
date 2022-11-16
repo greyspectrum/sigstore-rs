@@ -14,9 +14,9 @@
 // limitations under the License.
 
 use clap::{Arg, Command};
+use sigstore::errors::SigstoreError;
 use sigstore::rekor::apis::{configuration::Configuration, entries_api};
 use sigstore::rekor::models::log_entry::LogEntry;
-use sigstore::errors::SigstoreError;
 use std::str::FromStr;
 
 #[tokio::main]
@@ -40,7 +40,11 @@ async fn main() -> Result<(), SigstoreError> {
     const LOG_INDEX: &str = "1";
 
     let flags = matches.get_matches();
-    let index = i32::from_str(flags.get_one::<String>("log_index").unwrap_or(&LOG_INDEX.to_string()),)?;
+    let index = i32::from_str(
+        flags
+            .get_one::<String>("log_index")
+            .unwrap_or(&LOG_INDEX.to_string()),
+    )?;
 
     let configuration = Configuration::default();
 
