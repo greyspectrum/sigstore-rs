@@ -21,9 +21,8 @@ use sigstore::cosign::verification_constraint::{
 use sigstore::cosign::{CosignCapabilities, SignatureLayer};
 use sigstore::crypto::SigningScheme;
 use sigstore::errors::SigstoreVerifyConstraintsError;
-use sigstore::registry::{ClientConfig, ClientProtocol, OciReference};
 use sigstore::errors::{SigstoreError, SigstoreVerifyConstraintsError};
-use sigstore::registry::{ClientConfig, ClientProtocol};
+use sigstore::registry::{ClientConfig, ClientProtocol, OciReference};
 use sigstore::tuf::SigstoreRepository;
 use std::boxed::Box;
 use std::convert::TryFrom;
